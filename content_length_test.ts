@@ -6,9 +6,9 @@ import {
   Method,
   Status,
 } from "./_dev_deps.ts";
-import { withContentType } from "./content_length.ts";
+import { withContentLength } from "./content_length.ts";
 
-describe("withContentType", () => {
+describe("withContentLength", () => {
   it("should delete content-length header", async () => {
     const table: [Request, Response, Response][] = [
       [
@@ -47,7 +47,7 @@ describe("withContentType", () => {
     ];
 
     await Promise.all(table.map(async ([request, response, expected]) => {
-      const result = await withContentType(
+      const result = await withContentLength(
         request,
         response,
       );
@@ -76,7 +76,7 @@ describe("withContentType", () => {
     ];
 
     await Promise.all(table.map(async ([request, response, expected]) => {
-      const result = await withContentType(
+      const result = await withContentLength(
         request,
         response,
       );
@@ -105,7 +105,7 @@ describe("withContentType", () => {
     ];
 
     await Promise.all(table.map(async ([request, response, expected]) => {
-      const result = await withContentType(
+      const result = await withContentLength(
         request,
         response,
       );

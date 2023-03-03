@@ -2,7 +2,7 @@
 // This module is browser compatible.
 
 import { type Handler } from "./deps.ts";
-import { withContentType } from "./content_length.ts";
+import { withContentLength } from "./content_length.ts";
 
 /** HTTP `content-length` header middleware.
  * Add or remove `content-length` headers in compliance with [RFC 9110, 8.6 Content-Length](https://www.rfc-editor.org/rfc/rfc9110.html#name-content-length) safely .
@@ -26,5 +26,5 @@ export default async function contentLength(
 ): Promise<Response> {
   const response = await next(request);
 
-  return withContentType(request, response);
+  return withContentLength(request, response);
 }

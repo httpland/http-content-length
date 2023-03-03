@@ -13,7 +13,7 @@ enum Field {
   ContentLength = "content-length",
 }
 
-export function withContentType(
+export function withContentLength(
   request: Request,
   response: Response,
 ): Response | Promise<Response> {
