@@ -57,6 +57,9 @@ describe("withContentLength", () => {
   });
 
   it("should return same response", async () => {
+    const used = new Response("");
+    await used.text();
+
     const table: [Request, Response, Response][] = [
       [
         new Request("test:"),
@@ -70,8 +73,8 @@ describe("withContentLength", () => {
       ],
       [
         new Request("test:"),
-        Object.defineProperty(new Response(null), "bodyUsed", { value: true }),
-        new Response(null),
+        used,
+        used,
       ],
     ];
 
