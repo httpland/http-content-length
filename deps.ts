@@ -9,5 +9,6 @@ export {
   isSuccessfulStatus,
   Status,
 } from "https://deno.land/std@0.178.0/http/http_status.ts";
-export { Method } from "https://deno.land/x/http_utils@1.0.0-beta.7/method.ts";
+export { Method } from "https://deno.land/x/http_utils@1.0.0-beta.9/method.ts";
+export { RepresentationHeader } from "https://deno.land/x/http_utils@1.0.0-beta.9/header.ts";
 export { isString } from "https://deno.land/x/isx@1.0.0-beta.24/mod.ts";

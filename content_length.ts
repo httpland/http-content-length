@@ -6,12 +6,9 @@ import {
   isString,
   isSuccessfulStatus,
   Method,
+  RepresentationHeader,
   Status,
 } from "./deps.ts";
-
-enum Field {
-  ContentLength = "content-length",
-}
 
 export function withContentLength(
   request: Request,
@@ -22,14 +19,16 @@ export function withContentLength(
     response.status === Status.NoContent ||
     request.method === Method.Connect && isSuccessfulStatus(response.status)
   ) {
-    response.headers.delete(Field.ContentLength);
+    response.headers.delete(RepresentationHeader.ContentLength);
 
     return response;
   }
 
-  const contentLengthValue = response.headers.get(Field.ContentLength);
+  const contentLength = response.headers.get(
+    RepresentationHeader.ContentLength,
+  );
 
-  if (response.bodyUsed || isString(contentLengthValue)) return response;
+  if (response.bodyUsed || isString(contentLength)) return response;
 
   return response
     .clone()
@@ -37,7 +36,7 @@ export function withContentLength(
     .then(({ byteLength }) => byteLength)
     .then(String)
     .then((contentLength) => {
-      response.headers.set(Field.ContentLength, contentLength);
+      response.headers.set(RepresentationHeader.ContentLength, contentLength);
 
       return response;
     });

@@ -1,4 +1,10 @@
-import { assertEquals, assertExists, describe, it } from "./_dev_deps.ts";
+import {
+  assertEquals,
+  assertExists,
+  describe,
+  it,
+  Representation,
+} from "./_dev_deps.ts";
 import contentLength from "./mod.ts";
 
 describe("default export", () => {
@@ -11,6 +17,6 @@ describe("default export", () => {
 
     const response = await contentLength(new Request("test:"), handler);
 
-    assertEquals(response.headers.get("content-length"), "5");
+    assertEquals(response.headers.get(Representation.ContentLength), "5");
   });
 });

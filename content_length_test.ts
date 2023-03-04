@@ -4,6 +4,7 @@ import {
   equalsResponse,
   it,
   Method,
+  Representation,
   Status,
 } from "./_dev_deps.ts";
 import { withContentLength } from "./content_length.ts";
@@ -20,7 +21,7 @@ describe("withContentLength", () => {
         new Request("test:"),
         new Response(null, {
           status: Status.SwitchingProtocols,
-          headers: { "content-length": "0" },
+          headers: { [Representation.ContentLength]: "0" },
         }),
         new Response(null, { status: Status.SwitchingProtocols }),
       ],
@@ -28,7 +29,7 @@ describe("withContentLength", () => {
         new Request("test:"),
         new Response(null, {
           status: Status.NoContent,
-          headers: { "content-length": "0" },
+          headers: { [Representation.ContentLength]: "0" },
         }),
         new Response(null, { status: Status.NoContent }),
       ],
@@ -40,7 +41,7 @@ describe("withContentLength", () => {
         ),
         new Response(null, {
           status: Status.OK,
-          headers: { "content-length": "0" },
+          headers: { [Representation.ContentLength]: "0" },
         }),
         new Response(null),
       ],
@@ -63,13 +64,17 @@ describe("withContentLength", () => {
     const table: [Request, Response, Response][] = [
       [
         new Request("test:"),
-        new Response(null, { headers: { "content-length": "0" } }),
-        new Response(null, { headers: { "content-length": "0" } }),
+        new Response(null, {
+          headers: { [Representation.ContentLength]: "0" },
+        }),
+        new Response(null, {
+          headers: { [Representation.ContentLength]: "0" },
+        }),
       ],
       [
         new Request("test:"),
-        new Response(null, { headers: { "content-length": "" } }),
-        new Response(null, { headers: { "content-length": "" } }),
+        new Response(null, { headers: { [Representation.ContentLength]: "" } }),
+        new Response(null, { headers: { [Representation.ContentLength]: "" } }),
       ],
       [
         new Request("test:"),
@@ -93,17 +98,23 @@ describe("withContentLength", () => {
       [
         new Request("test:"),
         new Response(null),
-        new Response(null, { headers: { "content-length": "0" } }),
+        new Response(null, {
+          headers: { [Representation.ContentLength]: "0" },
+        }),
       ],
       [
         new Request("test:"),
         new Response("abc"),
-        new Response("abc", { headers: { "content-length": "3" } }),
+        new Response("abc", {
+          headers: { [Representation.ContentLength]: "3" },
+        }),
       ],
       [
         new Request("test:"),
         new Response("あいうえお"),
-        new Response("あいうえお", { headers: { "content-length": "15" } }),
+        new Response("あいうえお", {
+          headers: { [Representation.ContentLength]: "15" },
+        }),
       ],
     ];
 
